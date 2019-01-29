@@ -1,0 +1,32 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "tslint-config-prettier"
+    ],
+    "rules": {
+        "no-shadowed-variable": false,
+        "import-blacklist": [true, "lodash"],
+        "one-variable-per-declaration": false,
+        "quotemark": [true, "single"],
+        "no-submodule-imports": false,
+        "no-unused-variable": true,
+        "promise-function-async": true,
+        "max-file-line-count": [true, 300],
+        "no-trailing-whitespace": true,
+        "newline-before-return": true,
+        "no-consecutive-blank-lines": true,
+        "no-implicit-dependencies": false,
+        "indent": [true, "spaces", 2],
+        "ter-indent": [2, 2, {
+            "SwitchCase": 1
+        }],
+        "semicolon": [true, "always", "ignore-bound-class-methods"],
+        "no-console": false,
+        "object-literal-sort-keys": false,
+        "ordered-imports": false
+    },
+    "linterOptions": {
+        "exclude": ["src/**/*.test.ts*"]
+    }
+}

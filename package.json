@@ -1,0 +1,48 @@
+{
+  "name": "my-bookmarks-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build-ts && npm run tslint",
+    "build-ts": "tsc -p tsconfig.json --pretty",
+    "build:watch": "tsc -p tsconfig.json --pretty --watch --sourceMap true --sourceRoot 'src'",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "dev:start": "nodemon -r source-map-support/register ./dist --delay 2",
+    "predev": "yarn run build",
+    "dev": "concurrently \"yarn run build:watch\" \"yarn run dev:start\"",
+    "prod:start": "pm2 start dist/index.js",
+    "start": "yarn run prod:start",
+    "pretest": "yarn run tslint && tsc -p tsconfig.json --pretty",
+    "test": "cross-env PORT=3001 jest src --coverage --no-cache --verbose",
+    "test:watch": "cross-env PORT=3001 jest src --coverage --watch"
+  },
+  "author": "Mauricio Farinelli",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.1",
+    "morgan": "^1.9.1",
+    "pg": "^7.8.0",
+    "sequelize": "^4.42.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/body-parser": "^1.17.0",
+    "@types/cookie-parser": "^1.4.1",
+    "@types/express": "^4.16.1",
+    "@types/morgan": "^1.7.35",
+    "@types/pg": "^7.4.11",
+    "@types/sequelize": "^4.27.34",
+    "nodemon": "^1.18.9",
+    "prettier": "^1.16.1",
+    "source-map-support": "^0.5.10",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.4"
+  }
+}
