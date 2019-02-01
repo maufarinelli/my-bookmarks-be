@@ -7,7 +7,7 @@ const sequelize = new Sequelize(`postgres://postgres@localhost:5432/my-bookmarks
 
 const BookMark = sequelize.define<IBookmark, any>('bookmarks', {
   url: stringTypeGenerator(true, false),
-  category: stringTypeGenerator(true, false)
+  category: stringTypeGenerator(false, false)
 });
 
 // create all the defined tables in the specified database.

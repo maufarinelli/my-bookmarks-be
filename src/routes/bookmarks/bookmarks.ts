@@ -33,3 +33,20 @@ export const getBookmarks = (req: express.Request, res: express.Response) => {
       res.status(400).json({ message: 'Error: something wrong in your search. Please try it again.' });
     });
 };
+
+export const deleteBookmark = (req: express.Request, res: express.Response) => {
+  const { id } = req.body;
+
+  BookMark.findById(parseInt(id, 10))
+    .then(bookmark => {
+      if (bookmark) {
+        bookmark.destroy().then(() => {
+          res.status(200).json({ message: 'Bookmark successfuly deleted' });
+        });
+      }
+    })
+    .catch((error: Error) => {
+      console.log('delete bookmarks error: ', error);
+      res.status(400).json({ message: 'Error: something wrong trying to delete a bookmark. Please try it again.' });
+    });
+};
