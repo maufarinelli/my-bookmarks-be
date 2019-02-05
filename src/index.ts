@@ -38,7 +38,7 @@ app.post(ROUTES.signup, validateSignup, signup);
 app.post(ROUTES.login, login);
 app.post(ROUTES.addBookmark, getTokenToVerify, addBookmark);
 app.get(ROUTES.getBookmarks, getTokenToVerify, getBookmarks);
-app.post(ROUTES.deleteBookmark, getTokenToVerify, deleteBookmark);
+app.post(ROUTES.deleteBookmark, getTokenToVerify, deleteBookmark); // Using POST due to axios problem with delete method
 app.use(notFound); // route for handling 404 requests(unavailable routes)
 
 // Start server

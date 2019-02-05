@@ -11,8 +11,7 @@
     "dev:start": "nodemon -r source-map-support/register ./dist 3010 --delay 2",
     "predev": "yarn run build",
     "dev": "concurrently \"yarn run build:watch\" \"yarn run dev:start\"",
-    "prod:start": "pm2 start dist/index.js",
-    "start": "yarn run prod:start",
+    "prod": "yarn run build & PORT=3010 pm2 start dist/index.js",
     "pretest": "yarn run tslint && tsc -p tsconfig.json --pretty",
     "test": "cross-env PORT=3001 jest src --coverage --no-cache --verbose",
     "test:watch": "cross-env PORT=3001 jest src --coverage --watch"
@@ -29,9 +28,11 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
+    "global": "^4.3.2",
     "jsonwebtoken": "^8.4.0",
     "morgan": "^1.9.1",
     "pg": "^7.8.0",
+    "pm2": "^3.2.9",
     "sequelize": "^4.42.0"
   },
   "devDependencies": {
