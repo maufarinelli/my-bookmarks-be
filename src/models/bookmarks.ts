@@ -3,7 +3,9 @@ import Sequelize from 'sequelize';
 import { stringTypeGenerator } from './generators';
 import { IBookmark } from './interfaces';
 
-const sequelize = new Sequelize(`postgres://postgres@localhost:5432/my-bookmarks`);
+const sequelize = new Sequelize(
+  `postgres://${process.env.PSQL_USER}:${process.env.PSQL_PASS}@localhost:5432/my-bookmarks`
+);
 
 const BookMark = sequelize.define<IBookmark, any>('bookmarks', {
   url: stringTypeGenerator(true, false),
