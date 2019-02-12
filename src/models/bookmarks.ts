@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   `postgres://${process.env.PSQL_USER}:${process.env.PSQL_PASS}@localhost:5432/my-bookmarks`
 );
 
-const BookMark = sequelize.define<IBookmark, any>('bookmarks', {
+const BookMark = sequelize.define<IBookmark, {}>('bookmarks', {
   url: stringTypeGenerator(true, false),
   category: stringTypeGenerator(false, false)
 });

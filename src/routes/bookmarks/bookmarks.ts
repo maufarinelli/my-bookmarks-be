@@ -7,7 +7,7 @@ export const addBookmark = (req: express.Request, res: express.Response) => {
 
   BookMark.create({ url, category })
     .then((bookmark: IBookmark) => {
-      const { url, category } = (bookmark as any).dataValues; // tslint: disable-line
+      const { url, category } = bookmark.dataValues;
 
       res.status(200).json({
         message: 'Bookmark successfuly registered',

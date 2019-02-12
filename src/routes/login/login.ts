@@ -6,6 +6,7 @@ import { IUserInstance } from '../../models/interfaces';
 
 interface IUserMethods {
   validPassword: (password: string) => boolean;
+  dataValues: IUserInstance & {id: string};
 }
 
 export const login = (req: express.Request, res: express.Response) => {
@@ -13,7 +14,7 @@ export const login = (req: express.Request, res: express.Response) => {
     password = req.body.password;
 
   User.findOne({ where: { username } })
-    .then((user: Model<IUserInstance, any> & IUserMethods) => {
+    .then((user: Model<IUserInstance, {}> & IUserMethods) => {
       if (!user) {
         res
           .status(500)
@@ -21,7 +22,7 @@ export const login = (req: express.Request, res: express.Response) => {
       } else if (!user.validPassword(password)) {
         res.status(500).json({ message: 'Some error occured. Please check your password and try it again.' });
       } else {
-        const { username, email, id } = (user as any).dataValues;
+        const { username, email, id } = user.dataValues;
 
         jwt.sign({ user }, 'secretkey-jsonwebtoken', { expiresIn: '1h' }, (err, token) => {
           res.json({

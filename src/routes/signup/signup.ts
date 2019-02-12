@@ -5,6 +5,10 @@ import { IUserInstance } from '../../models/interfaces';
 import { Model } from 'sequelize';
 import { check, validationResult } from 'express-validator/check';
 
+interface IUserDataValues {
+  dataValues: IUserInstance & {id: string};
+}
+
 export const validateSignup = [
   check('username', 'wrong username').exists(),
   check('email', 'wrong email')
@@ -21,8 +25,8 @@ const createUser = (req: express.Request, res: express.Response) => {
     email,
     password
   })
-    .then((user: Model<IUserInstance, any>) => {
-      const { email, id, username } = (user as any).dataValues; // tslint:disable-line
+    .then((user: Model<IUserInstance, {}> & IUserDataValues) => {
+      const { email, id, username } = user.dataValues;
 
       jwt.sign({ user }, 'secretkey-jsonwebtoken', { expiresIn: '1h' }, (err, token) => {
         res.json({
