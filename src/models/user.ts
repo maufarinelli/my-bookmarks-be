@@ -5,15 +5,16 @@ import { IUserInstance } from './interfaces';
 import { stringTypeGenerator } from './generators';
 
 interface IPrototype {
-  prototype: any;
+  prototype: ObjectConstructor;
 }
 
 const sequelize = new Sequelize(
   `postgres://${process.env.PSQL_USER}:${process.env.PSQL_PASS}@localhost:5432/my-bookmarks`
 );
 
+// Model<IUserInstance, {}> & IUserDataValues
 // setup User model and its fields.
-const User: any & IPrototype = sequelize.define<IUserInstance, any>(
+const User: any & IPrototype = sequelize.define<IUserInstance, {}>(
   'users',
   {
     username: stringTypeGenerator(true, false),
