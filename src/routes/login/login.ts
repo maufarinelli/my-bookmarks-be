@@ -23,7 +23,7 @@ export const login = (req: express.Request, res: express.Response) => {
       } else {
         const { username, email, id } = (user as any).dataValues;
 
-        jwt.sign({ user }, 'secretkey-jsonwebtoken', { expiresIn: '1h' }, (err, token) => {
+        jwt.sign({ user }, (process.env.SECRET_KEY_JWT as string), { expiresIn: '1h' }, (err, token) => {
           res.json({
             user: { email, id, username },
             message: 'User logged in',
